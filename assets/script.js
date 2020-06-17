@@ -1,4 +1,7 @@
 var totalSeconds = 60;
+var startBtn = document.querySelector(".btn-info");
+var nextQuestionBtn = document.querySelector(".nextbtn");
+var answerArea = document.querySelector(".answerOptions");
 
 var myQuestions = [
     {
@@ -43,6 +46,25 @@ var myQuestions = [
       }
   ];
 
+
+  //for loop which runs through each question and displays the questions and answers
+  function startQuiz() {
+      //displays question number one 
+      $("#questions").text(myQuestions[0].question); 
+      
+      //loops through question options for question number one 
+      for (i=0; i<4; i++){
+        var answerOptions = "";
+        var answer = (myQuestions[0].answers[i]);
+        answerOptions =+ "<br><hr>" + answer; 
+        console.log(answerOptions);
+
+
+      }
+      answerArea.innerHTML(answerOptions); 
+  } 
+
+
   // function startTimer() {
   
   //   We only want the timer to run if totalSeconds is > 0
@@ -55,3 +77,7 @@ var myQuestions = [
   //     alert("Minutes of work/rest must be greater than 0.")
   //   }
   // }
+
+  
+  //all my called functions 
+  startBtn.addEventListener("click", startQuiz);
