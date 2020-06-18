@@ -50,18 +50,21 @@ var myQuestions = [
   //for loop which runs through each question and displays the questions and answers
   function startQuiz() {
       //displays question number one 
-      $("#questions").text(myQuestions[0].question); 
+      $(".questions").text(myQuestions[0].question); 
+      $(".btn-info").css("display", "none");
       
       //loops through question options for question number one 
-      for (i=0; i<4; i++){
-        var answerOptions = "";
+      for (i=0; i<4; i++) {
         var answer = (myQuestions[0].answers[i]);
-        answerOptions =+ "<br><hr>" + answer; 
-        console.log(answerOptions);
-
-
+        var answerBtn = $("<button>"); 
+        answerBtn.addClass("answerOption");
+        answerBtn.text(answer); 
+        console.log(answer);
+        $(".answerOptions").append(answerBtn);
+        $(".answerOptions").append("<br>");
+        
       }
-      answerArea.innerHTML(answerOptions); 
+   
   } 
 
 
