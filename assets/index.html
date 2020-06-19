@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href= "style.css">
     <!--JQuery link-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
 </head>
@@ -26,7 +25,7 @@
             <div class="row">
                 <!-- div class for where the quiz will display  -->
                 <div class="quizArea">
-                    <button type="button" class="btn btn-info">Start Quiz</button>   
+                    <button type="button" id ="start" class="btn btn-info">Start Quiz</button>   
                     <div class= "questions"></div>
                     <div class= "answers">
                         <div class = answerOptions></div>
@@ -35,6 +34,7 @@
                     <div class = "timer"></div>
                     </div>
                 </div>
+            </div>
             <div class="row"> <!--why isn't this making a new row -->
                 <div class = "highScoreForm">
                     <form class="form-inline">
@@ -48,12 +48,13 @@
                     </form>
                 </div>    
             </div>
-            </div>
+            
         </div>      
     </div>
     
     
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src = script.js></script>
 </body>
 </html>

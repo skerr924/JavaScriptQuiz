@@ -1,9 +1,9 @@
 
-var startBtn = document.querySelector(".btn-info");
+var startBtn = document.querySelector("#start");
 var answerArea = document.querySelector(".answerOptions");
 var questionNumber = 0; 
 var timerCount=60;
-var counter=setInterval(startTimer, 1000); //1000 will  run it every 1 second
+var counter; 
 var submitBtn = document.querySelector(".submitBtn");
 
 var myQuestions = [
@@ -84,6 +84,7 @@ var myQuestions = [
   }
   
   function startTimer() {
+    counter=setInterval(startTimer, 1000); //1000 will  run it every 1 second
     timerCount=timerCount-1;
     $(".timer").text("You have " + timerCount + " seconds remaining");
     if (timerCount <= 0)
@@ -106,17 +107,16 @@ var myQuestions = [
       $(".quizArea").text("You didn't score a single point.. ouch!"); 
     }
     
-    //below not working - need to correct 
-    submitBtn.addEventListener("click", nameToHighScore); 
-    function nameToHighScore(){
-      console.log("inside nametohighscore function");
-    }  
-
   }
   
-  
+  //not working - shows up for a split second and then goes away again - seems like it reloads the page 
+  function nameToHighScore(){
+    console.log("inside nametohighscore function");
+  }  
   
   // all eventListeners 
-  answerArea.addEventListener("click", checkAnswer); //need to change to jquery 
-  startBtn.addEventListener("click", nextQuestion); //need to change to jquery 
-  startBtn.addEventListener("click", startTimer); //this is starting on hover, not on click, why??
+  answerArea.addEventListener("click", checkAnswer); 
+  startBtn.addEventListener("click", nextQuestion); 
+  startBtn.addEventListener("click", startTimer); 
+  submitBtn.addEventListener("click", nameToHighScore); 
+
