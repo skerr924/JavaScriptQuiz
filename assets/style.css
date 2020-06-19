@@ -3,6 +3,9 @@ container {
 }
 
 .quizArea { 
-    background-color: lightgoldenrodyellow; 
     padding: 10px; 
+}
+
+.form-inline {
+    display: none;
 }

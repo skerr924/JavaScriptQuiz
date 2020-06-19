@@ -4,6 +4,7 @@ var answerArea = document.querySelector(".answerOptions");
 var questionNumber = 0; 
 var timerCount=60;
 var counter=setInterval(startTimer, 1000); //1000 will  run it every 1 second
+var submitBtn = document.querySelector(".submitBtn");
 
 var myQuestions = [
     {
@@ -97,17 +98,23 @@ var myQuestions = [
   };
 
   function displayFinalScreen(){ 
-    clearAnswers();
-    $(".timer").empty(); //this isn't working yet 
-    $(".questions").empty();
+    $(".form-inline").css("display", "block");
     if (timerCount > 0){
-      $(".questions").text("Your final score is " + timerCount + " ! Good job!"); 
+      $(".quizArea").text("Your final score is " + timerCount + " ! Good job!"); 
     }
     else {
-      $(".questions").text("You didn't score a single point.. ouch!"); 
+      $(".quizArea").text("You didn't score a single point.. ouch!"); 
     }
-  }
+    
+    //below not working - need to correct 
+    submitBtn.addEventListener("click", nameToHighScore); 
+    function nameToHighScore(){
+      console.log("inside nametohighscore function");
+    }  
 
+  }
+  
+  
   
   // all eventListeners 
   answerArea.addEventListener("click", checkAnswer); //need to change to jquery 
