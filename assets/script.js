@@ -4,7 +4,12 @@ var answerArea = document.querySelector(".answerOptions");
 var questionNumber = 0; 
 var timerCount=60;
 var counter; 
+var names = [];
 var submitBtn = document.querySelector(".submitBtn");
+var nameInput = document.querySelector("#name-text");
+var highScoreForm = document.querySelector(".highScoreForm");
+var highScoreList = document.querySelector("#highScoreList");
+var finalScore; 
 
 var myQuestions = [
     {
@@ -69,7 +74,17 @@ var myQuestions = [
         questionNumber++;
       }
       else {
-        displayFinalScreen();
+        $(".form-inline").css("display", "block");
+        if (timerCount > 0){
+          $(".quizArea").text("Your final score is " + timerCount + " ! Good job!"); 
+          
+        }
+        else {
+          $(".quizArea").text("You didn't score a single point.. ouch!"); 
+          
+        }
+        finalScore = timerCount; 
+        getStoredNames();
       }
   } 
 
@@ -96,27 +111,63 @@ var myQuestions = [
 
   function clearAnswers(){
     $(".answerOptions").empty();
-  };
-
-  function displayFinalScreen(){ 
-    $(".form-inline").css("display", "block");
-    if (timerCount > 0){
-      $(".quizArea").text("Your final score is " + timerCount + " ! Good job!"); 
-    }
-    else {
-      $(".quizArea").text("You didn't score a single point.. ouch!"); 
-    }
-    
   }
   
-  //not working - shows up for a split second and then goes away again - seems like it reloads the page 
-  function nameToHighScore(){
-    console.log("inside nametohighscore function");
-  }  
+  function renderHighScores(){
+      highScoreList.innerHTML = "";
+    
+      // Render a new li for each high score name 
+      for (var i = 0; i < names.length; i++) {
+      var name = names[i];
+
+      var li = document.createElement("li");
+      li.textContent = name;
+      li.setAttribute("data-index", i);
+      highScoreList.appendChild(li);
+  }
+
+  }
+
+  function getStoredNames() {
+    // Get stored names from localStorage
+    // Parsing the JSON string to an object
+    var storedNames = JSON.parse(localStorage.getItem("names"));
+   
+    // If names were retrieved from localStorage, update the names array to it
+    if (storedNames !== null) {
+      names = storedNames;
+    }
+    // Render names to the DOM
+    renderHighScores();
+  }
+
+  function storeNames() {
+    // Stringify and set "names" key in localStorage to names array
+    localStorage.setItem("names", JSON.stringify(names));
+  }
   
-  // all eventListeners 
+    // all eventListeners 
+  highScoreForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+  
+    var nameText = nameInput.value.trim() + " with a score of " + finalScore;
+  
+    // Return from function early if submitted nameText is blank
+    if (nameText === "") {
+      return;
+    }
+  
+    // Add new nameText to names array, clear the input
+    names.push(nameText);
+    nameInput.value = "";
+  
+    // Store updated todos in localStorage, re-render the list
+    storeNames();
+    renderHighScores();
+  });
   answerArea.addEventListener("click", checkAnswer); 
   startBtn.addEventListener("click", nextQuestion); 
   startBtn.addEventListener("click", startTimer); 
-  submitBtn.addEventListener("click", nameToHighScore); 
+  
+  
 
