@@ -1,8 +1,9 @@
-var totalSeconds = 60;
+
 var startBtn = document.querySelector(".btn-info");
 var answerArea = document.querySelector(".answerOptions");
 var questionNumber = 0; 
-
+var timerCount=60;
+var counter=setInterval(startTimer, 1000); //1000 will  run it every 1 second
 
 var myQuestions = [
     {
@@ -50,48 +51,65 @@ var myQuestions = [
 
   //for loop which runs through each question and displays the questions and answers
   function nextQuestion() {
-      //displays question number one 
-      $(".questions").text(myQuestions[questionNumber].question); 
-      $(".questions").append("<br><br>")
-      $(".btn-info").css("display", "none");
       
       //loops through question options for question number one 
-      for (i=0; i<4; i++) {
-        var answer = (myQuestions[questionNumber].answers[i]);
-        var answerBtn = $("<button>"); 
-        answerBtn.addClass("btn btn-sm btn-outline-dark");
-        answerBtn.text(answer); 
-        $(".answerOptions").append(answerBtn);
-        $(".answerOptions").append("<br><br>"); //is there a better way to do this? I tried addng it to the line above, didn't work
+      if (questionNumber < myQuestions.length){
+        for (i=0; i<4; i++) {
+          $(".questions").text(myQuestions[questionNumber].question); 
+          $(".questions").append("<br><br>");
+          $(".btn-info").css("display", "none");
+          var answer = (myQuestions[questionNumber].answers[i]);
+          var answerBtn = $("<button>"); 
+          answerBtn.addClass("btn btn-sm btn-outline-dark");
+          answerBtn.text(answer); 
+          $(".answerOptions").append(answerBtn);
+          $(".answerOptions").append("<br><br>"); //is there a better way to do this? I tried addng it to the line above, didn't work
+        }
+        questionNumber++;
       }
-      
-      questionNumber++;
-     
+      else {
+        displayFinalScreen();
+      }
   } 
 
-  // function displayNextButton (){
-  //   var nextBtn = $("<button>"); 
-  //   nextBtn.addClass("btn btn-sm btn-outline"); 
-  //   nextBtn.text("Next"); 
-  //   $(".nextButton").append(nextBtn);
-  //   nextBtn.addEventListener("click", nextQuestion);
-  // }
-
-  // function startTimer() {
+  function checkAnswer(){
+    var questionClicked = questionNumber - 1; 
+      if ($(this).text() !== myQuestions[questionClicked].correctAnswer){
+        timerCount= timerCount-5;
+    }
+    clearAnswers();
+    nextQuestion();
+     
+  }
   
-  //   We only want the timer to run if totalSeconds is > 0
-  //   if (totalSeconds > 0) {
-  //     totalSeconds--; 
-  //     So renderTime() is called here once every second.
-  //     renderTime();
-  //       }, 1000);
-  //   } else {
-  //     alert("Minutes of work/rest must be greater than 0.")
-  //   }
-  // }
+  function startTimer() {
+    timerCount=timerCount-1;
+    $(".timer").text("You have " + timerCount + " seconds remaining");
+    if (timerCount <= 0)
+    {
+       clearInterval(counter);
+       //counter ended, show end screen 
+    }
+  }
+
+  function clearAnswers(){
+    $(".answerOptions").empty();
+  };
+
+  function displayFinalScreen(){ 
+    clearAnswers();
+    $(".timer").empty(); //this isn't working yet 
+    $(".questions").empty();
+    if (timerCount > 0){
+      $(".questions").text("Your final score is " + timerCount + " ! Good job!"); 
+    }
+    else {
+      $(".questions").text("You didn't score a single point.. ouch!"); 
+    }
+  }
 
   
-  //all my called functions 
-  // answerBtn.addEventListener("click", checkAnswer); 
-  startBtn.addEventListener("click", nextQuestion);
-
+  // all eventListeners 
+  answerArea.addEventListener("click", checkAnswer); //need to change to jquery 
+  startBtn.addEventListener("click", nextQuestion); //need to change to jquery 
+  startBtn.addEventListener("click", startTimer); //this is starting on hover, not on click, why??
