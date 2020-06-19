@@ -1,7 +1,8 @@
 var totalSeconds = 60;
 var startBtn = document.querySelector(".btn-info");
-var nextQuestionBtn = document.querySelector(".nextbtn");
 var answerArea = document.querySelector(".answerOptions");
+var questionNumber = 0; 
+
 
 var myQuestions = [
     {
@@ -48,25 +49,33 @@ var myQuestions = [
 
 
   //for loop which runs through each question and displays the questions and answers
-  function startQuiz() {
+  function nextQuestion() {
       //displays question number one 
-      $(".questions").text(myQuestions[0].question); 
+      $(".questions").text(myQuestions[questionNumber].question); 
+      $(".questions").append("<br><br>")
       $(".btn-info").css("display", "none");
       
       //loops through question options for question number one 
       for (i=0; i<4; i++) {
-        var answer = (myQuestions[0].answers[i]);
+        var answer = (myQuestions[questionNumber].answers[i]);
         var answerBtn = $("<button>"); 
-        answerBtn.addClass("answerOption");
+        answerBtn.addClass("btn btn-sm btn-outline-dark");
         answerBtn.text(answer); 
-        console.log(answer);
         $(".answerOptions").append(answerBtn);
-        $(".answerOptions").append("<br>");
-        
+        $(".answerOptions").append("<br><br>"); //is there a better way to do this? I tried addng it to the line above, didn't work
       }
-   
+      
+      questionNumber++;
+     
   } 
 
+  // function displayNextButton (){
+  //   var nextBtn = $("<button>"); 
+  //   nextBtn.addClass("btn btn-sm btn-outline"); 
+  //   nextBtn.text("Next"); 
+  //   $(".nextButton").append(nextBtn);
+  //   nextBtn.addEventListener("click", nextQuestion);
+  // }
 
   // function startTimer() {
   
@@ -83,4 +92,6 @@ var myQuestions = [
 
   
   //all my called functions 
-  startBtn.addEventListener("click", startQuiz);
+  // answerBtn.addEventListener("click", checkAnswer); 
+  startBtn.addEventListener("click", nextQuestion);
+
