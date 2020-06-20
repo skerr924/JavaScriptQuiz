@@ -24,6 +24,16 @@ var myQuestions = [
     correctAnswer: "HTML and CSS"
   },
   {
+    question: "JavaScript requires semi-colons at the end of a statement...",
+    answers: [
+      "Never",
+      "Always",
+      "Only in some cases",
+      "Only when using jQuery"
+    ],
+    correctAnswer: "Never"
+  },
+  {
     question: "Conditions of an if statement are surrounded on either side by: ",
     answers: [
       "Curly braces { }",
@@ -32,6 +42,36 @@ var myQuestions = [
       'Quotation marks " "'
     ],
     correctAnswer: "Parentheses ( )"
+  },
+  {
+    question: "JavaScript was previously known as:",
+    answers: [
+      "Lightening",
+      "CoffeeScript",
+      "CompTalk",
+      "Mocha"
+    ],
+    correctAnswer: "Mocha"
+  },
+  {
+    question: "When was JavaScript invented?",
+    answers: [
+      "2010",
+      "1995",
+      "1955",
+      "Nobody knows"
+    ],
+    correctAnswer: "1995"
+  },
+  {
+    question: "What is the relationship between JavaScript and JQuery?",
+    answers: [
+      "JQuery uses JavaScript to perform functions, but JavaScript doesn't use jQuery",
+      "You must use one or the other; they're unrelated",
+      "They are the same and can be perfectly interchanged with one another",
+      "You use completely separate files, depending on the language you're using"
+    ],
+    correctAnswer: "JQuery uses JavaScript to perform functions, but JavaScript doesn't use jQuery"
   },
   {
     question: "Any information stored on the Local Directory lives where?",
