@@ -9,3 +9,13 @@ container {
 .form-inline {
     display: none;
 }
+
+#name-text,
+#highScoreList { 
+    padding: 10px; 
+    margin: 10px; 
+}
+
+#highScoreHeadline {
+    display: none; 
+}

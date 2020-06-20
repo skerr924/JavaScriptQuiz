@@ -1,6 +1,19 @@
 # JavaScriptQuiz
 
-Original assignment: 
+# Functionality of the website: 
+
+```
+The user is prompted to "Start Quiz" 
+A 60 second timer starts, it counts down by the second 
+Questions about JavaScript and jQuery appear: if the user selects the correct answer, they move to the next question with no penalty, but if the user selects the incorrect answer, they move to the next question and their timer count goes down by an additional 5 seconds 
+When they get to the end of the quiz, their remaining time is displayed as their score 
+They have the option to input their initials to be listed with names of others' scores 
+
+```
+
+
+
+# Original assignment: 
 
 # 04 Web APIs: Code Quiz
 
@@ -29,10 +42,6 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score
 ```
-
-The following animation demonstrates the application functionality:
-
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
 
 ### Review
 

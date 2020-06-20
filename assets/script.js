@@ -1,4 +1,3 @@
-
 var startBtn = document.querySelector("#start");
 var answerArea = document.querySelector(".answerOptions");
 var questionNumber = 0; 
@@ -10,120 +9,127 @@ var nameInput = document.querySelector("#name-text");
 var highScoreForm = document.querySelector(".highScoreForm");
 var highScoreList = document.querySelector("#highScoreList");
 var finalScore; 
+var answerBtn; 
+var counter; 
+// counter=setInterval(startTimer, 1000); //1000 will  run it every 1 second
 
 var myQuestions = [
-    {
-      question: "Which does JavaScript work with to create interactive webpages online?",
+  {
+    question: "Which does JavaScript work with to create interactive webpages online?",
+    answers: [
+      "HTML and CSS",
+      "CSS and JQuery",
+      "HTML only",
+      "HTML and your local computer files"
+    ],
+    correctAnswer: "HTML and CSS"
+  },
+  {
+    question: "Conditions of an if statement are surrounded on either side by: ",
+    answers: [
+      "Curly braces { }",
+      "Brackets [ ]",
+      "Parentheses ( )",
+      'Quotation marks " "'
+    ],
+    correctAnswer: "Parentheses ( )"
+  },
+  {
+    question: "Any information stored on the Local Directory lives where?",
+    answers: [
+      "It depends on where the central database is geographically located",
+      "The browser memory",
+      "The hardrive of the user",
+      "It is not stored anywhere"
+    ],
+    correctAnswer: "The browser memory"
+  },
+  {
+      question: "Learning JavaScript is",
       answers: [
-        "HTML and CSS",
-        "CSS and JQuery",
-        "HTML only",
-        "HTML and your local computer files"
+        "Fun",
+        "Occassionally confusing",
+        "Worth it!",
+        "All of the above"
       ],
-      correctAnswer: "HTML and CSS"
-    },
-    {
-      question: "Conditions of an if statement are surrounded on either side by: ",
-      answers: [
-        "Curly braces { }",
-        "Brackets [ ]",
-        "Parentheses ( )",
-        'Quotation marks " "'
-      ],
-      correctAnswer: "Parentheses ( )"
-    },
-    {
-      question: "Any information stored on the Local Directory lives where?",
-      answers: [
-        "It depends on where the central database is geographically located",
-        "The browser memory",
-        "The hardrive of the user",
-        "It is not stored anywhere"
-      ],
-      correctAnswer: "The browser memory"
-    },
-    {
-        question: "Learning JavaScript is",
-        answers: [
-          "Fun",
-          "Occassionally confusing",
-          "Worth it!",
-          "All of the above"
-        ],
-        correctAnswer: "All of the above"
-      }
-  ];
-
-
-  //for loop which runs through each question and displays the questions and answers
-  function nextQuestion() {
-      
-      //loops through question options for question number one 
-      if (questionNumber < myQuestions.length){
-        for (i=0; i<4; i++) {
-          $(".questions").text(myQuestions[questionNumber].question); 
-          $(".questions").append("<br><br>");
-          $(".btn-info").css("display", "none");
-          var answer = (myQuestions[questionNumber].answers[i]);
-          var answerBtn = $("<button>"); 
-          answerBtn.addClass("btn btn-sm btn-outline-dark");
-          answerBtn.text(answer); 
-          $(".answerOptions").append(answerBtn);
-          $(".answerOptions").append("<br><br>"); //is there a better way to do this? I tried addng it to the line above, didn't work
-        }
-        questionNumber++;
-      }
-      else {
-        $(".form-inline").css("display", "block");
-        if (timerCount > 0){
-          $(".quizArea").text("Your final score is " + timerCount + " ! Good job!"); 
-          
-        }
-        else {
-          $(".quizArea").text("You didn't score a single point.. ouch!"); 
-          
-        }
-        finalScore = timerCount; 
-        getStoredNames();
-      }
-  } 
-
-  function checkAnswer(){
-    var questionClicked = questionNumber - 1; 
-      if ($(this).text() !== myQuestions[questionClicked].correctAnswer){
-        timerCount= timerCount-5;
+      correctAnswer: "All of the above"
     }
-    clearAnswers();
-    nextQuestion();
-     
-  }
-  
-  function startTimer() {
-    counter=setInterval(startTimer, 1000); //1000 will  run it every 1 second
-    timerCount=timerCount-1;
-    $(".timer").text("You have " + timerCount + " seconds remaining");
-    if (timerCount <= 0)
-    {
-       clearInterval(counter);
-       //counter ended, show end screen 
-    }
-  }
+];
 
-  function clearAnswers(){
-    $(".answerOptions").empty();
+
+//for loop which runs through each question and displays the questions and answers
+function nextQuestion() {
+
+    //loops through question options for question number one 
+    if (questionNumber < myQuestions.length){
+      for (i=0; i<4; i++) {
+        $(".questions").text(myQuestions[questionNumber].question); 
+        $(".questions").append("<br><br>");
+        $(".btn-info").css("display", "none");
+        var answer = (myQuestions[questionNumber].answers[i]);
+        answerBtn = $("<button>"); 
+        answerBtn.addClass("btn btn-sm btn-outline-dark");
+        answerBtn.text(answer); 
+        $(".answerOptions").append(answerBtn);
+        $(".answerOptions").append("<br><br>"); //is there a better way to do this? I tried addng it to the line above, didn't work
+      }
+      questionNumber++;
+    }
+    else {
+      displayFinalScreen();
+    }
+} 
+
+function checkAnswer(){
+  var questionClicked = questionNumber - 1; 
+    if ($(this).text() !== myQuestions[questionClicked].correctAnswer){
+      timerCount= timerCount-5;
   }
+  clearAnswers();
+  nextQuestion();
+   
+}
+
+function startTimer() {
+  counter = setInterval(decrementTime, 1000);
+}
+
+function decrementTime() {
+  timerCount = timerCount - 1;
+  $('.timer').text('You have ' + timerCount + ' seconds remaining');
+  if (timerCount <= 0) {
+    clearInterval(counter);
+  }
+}
+
+
+function clearAnswers(){
+  $(".answerOptions").empty();
+}
+
+function displayFinalScreen(){ 
+  finalScore = timerCount;
+  $(".form-inline").css("display", "block");
+  if (timerCount > 0){
+    $(".quizArea").text("Your final score is " + finalScore + " ! Good job!"); 
+  }
+  else {
+    $(".quizArea").text("You didn't score a single point.. ouch!"); 
+  }
+  renderHighScores();
+}
   
-  function renderHighScores(){
+function renderHighScores(){
       highScoreList.innerHTML = "";
     
       // Render a new li for each high score name 
       for (var i = 0; i < names.length; i++) {
-      var name = names[i];
+        var name = names[i];
 
-      var li = document.createElement("li");
-      li.textContent = name;
-      li.setAttribute("data-index", i);
-      highScoreList.appendChild(li);
+        var li = document.createElement("li");
+        li.textContent = name;
+        li.setAttribute("data-index", i);
+        highScoreList.appendChild(li);
   }
 
   }
@@ -165,9 +171,7 @@ var myQuestions = [
     storeNames();
     renderHighScores();
   });
-  answerArea.addEventListener("click", checkAnswer); 
+
+  answerArea.addEventListener("click", checkAnswer);
   startBtn.addEventListener("click", nextQuestion); 
   startBtn.addEventListener("click", startTimer); 
-  
-  
-
