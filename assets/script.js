@@ -123,10 +123,10 @@ function renderHighScores(){
       // Render a new li for each high score and name 
       for (var i = 0; i < names.length; i++) {
         var name = names[i];
-        var li = document.createElement("li");
-        li.textContent = name;
-        li.setAttribute("data-index", i);
-        highScoreList.appendChild(li);
+        var nameLineItem = document.createElement("p");
+        nameLineItem.textContent = name;
+        nameLineItem.setAttribute("data-index", i);
+        highScoreList.appendChild(nameLineItem);
     }
 
   }
