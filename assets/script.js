@@ -1,5 +1,5 @@
 var startBtn = document.querySelector("#start");
-var answerArea = document.querySelector(".answerOptions");
+var answerArea = $(".answerOptions");
 var questionNumber = 0; 
 var timerCount=60;
 var counter; 
@@ -9,9 +9,8 @@ var nameInput = document.querySelector("#name-text");
 var highScoreForm = document.querySelector(".highScoreForm");
 var highScoreList = document.querySelector("#highScoreList");
 var finalScore; 
-var answerBtn; 
 var counter; 
-// counter=setInterval(startTimer, 1000); //1000 will  run it every 1 second
+
 
 var myQuestions = [
   {
@@ -67,17 +66,17 @@ function nextQuestion() {
         $(".questions").append("<br><br>");
         $(".btn-info").css("display", "none");
         var answer = (myQuestions[questionNumber].answers[i]);
-        answerBtn = $("<button>"); 
-        answerBtn.addClass("btn btn-sm btn-outline-dark");
+        var answerBtn = $("<button>");
         answerBtn.text(answer); 
+        answerBtn.addClass("btn btn-sm btn-outline-dark answerBtn");
         $(".answerOptions").append(answerBtn);
-        $(".answerOptions").append("<br><br>"); //is there a better way to do this? I tried addng it to the line above, didn't work
+        $(".answerOptions").append("<br><br>"); 
       }
-      questionNumber++;
     }
     else {
       displayFinalScreen();
     }
+    questionNumber++;
 } 
 
 function checkAnswer(){
@@ -172,6 +171,6 @@ function renderHighScores(){
     renderHighScores();
   });
 
-  answerArea.addEventListener("click", checkAnswer);
+  answerArea.on("click", ".answerBtn", checkAnswer);
   startBtn.addEventListener("click", nextQuestion); 
   startBtn.addEventListener("click", startTimer); 
