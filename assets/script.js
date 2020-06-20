@@ -1,4 +1,4 @@
-var startBtn = document.querySelector("#start");
+var startBtn = $("#start");
 var answerArea = $(".answerOptions");
 var questionNumber = 0; 
 var timerCount=60;
@@ -115,27 +115,26 @@ function displayFinalScreen(){
   else {
     $(".quizArea").text("You didn't score a single point.. ouch!"); 
   }
-  renderHighScores();
+  getStoredNames();
 }
   
 function renderHighScores(){
       highScoreList.innerHTML = "";
-    
-      // Render a new li for each high score name 
+      // Render a new li for each high score and name 
       for (var i = 0; i < names.length; i++) {
         var name = names[i];
-
         var li = document.createElement("li");
         li.textContent = name;
         li.setAttribute("data-index", i);
         highScoreList.appendChild(li);
-  }
+    }
 
   }
 
   function getStoredNames() {
     // Get stored names from localStorage
     // Parsing the JSON string to an object
+    console.log("get stored names")
     var storedNames = JSON.parse(localStorage.getItem("names"));
    
     // If names were retrieved from localStorage, update the names array to it
@@ -172,5 +171,5 @@ function renderHighScores(){
   });
 
   answerArea.on("click", ".answerBtn", checkAnswer);
-  startBtn.addEventListener("click", nextQuestion); 
-  startBtn.addEventListener("click", startTimer); 
+  startBtn.on("click", nextQuestion); 
+  startBtn.on("click", startTimer); 
