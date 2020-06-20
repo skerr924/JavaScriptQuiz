@@ -11,7 +11,6 @@ var highScoreList = document.querySelector("#highScoreList");
 var finalScore; 
 var counter; 
 
-
 var myQuestions = [
   {
     question: "Which does JavaScript work with to create interactive webpages online?",
@@ -96,7 +95,7 @@ var myQuestions = [
 ];
 
 
-//for loop which runs through each question and displays the questions and answers
+//function displays each question in order until it gets to the end 
 function nextQuestion() {
 
     //loops through question options for question number one 
@@ -119,6 +118,8 @@ function nextQuestion() {
     questionNumber++;
 } 
 
+//checks to see if an answer is correct, if not, detracts 5 seconds from the clock
+//and from the person's end score 
 function checkAnswer(){
   var questionClicked = questionNumber - 1; 
     if ($(this).text() !== myQuestions[questionClicked].correctAnswer){
@@ -129,10 +130,12 @@ function checkAnswer(){
    
 }
 
+//starts the timer
 function startTimer() {
   counter = setInterval(decrementTime, 1000);
 }
 
+//decrements time by one every second 
 function decrementTime() {
   timerCount = timerCount - 1;
   $('.timer').text('You have ' + timerCount + ' seconds remaining');
@@ -141,11 +144,11 @@ function decrementTime() {
   }
 }
 
-
+//clears all answers so the quiz is over
 function clearAnswers(){
   $(".answerOptions").empty();
 }
-
+//final screen which displays the score 
 function displayFinalScreen(){ 
   finalScore = timerCount;
   $(".form-inline").css("display", "block");
@@ -157,10 +160,15 @@ function displayFinalScreen(){
   }
   getStoredNames();
 }
-  
+
+//prints the highscores to the page 
 function renderHighScores(){
-      highScoreList.innerHTML = "";
-      // Render a new li for each high score and name 
+      highScoreList.innerHTML = "<h4>Leaderboard:<hr>";
+      //display highscore headline
+      // var highscoreHeadline = document.createElement(h4);
+      // highscoreHeadline.textContent= "Leaderboard:"
+      // highScoreHeadingArea.appendChild(highscoreHeadline);
+      //Render a new li for each high score and name 
       for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var nameLineItem = document.createElement("p");
@@ -171,6 +179,7 @@ function renderHighScores(){
 
   }
 
+  //pulls names from local storage 
   function getStoredNames() {
     // Get stored names from localStorage
     // Parsing the JSON string to an object
@@ -185,29 +194,31 @@ function renderHighScores(){
     renderHighScores();
   }
 
+  //adds inputted names into the local storage 
   function storeNames() {
     // Stringify and set "names" key in localStorage to names array
     localStorage.setItem("names", JSON.stringify(names));
   }
   
-    // all eventListeners 
+  //all event listeners below: 
+  
   highScoreForm.addEventListener("submit", function(event) {
-    event.preventDefault();
+      event.preventDefault();
+    
+      var nameText = nameInput.value.trim() + " with a score of " + finalScore;
+    
+      // Return from function early if submitted nameText is blank
+      if (nameText === "") {
+        return;
+      }
   
-    var nameText = nameInput.value.trim() + " with a score of " + finalScore;
-  
-    // Return from function early if submitted nameText is blank
-    if (nameText === "") {
-      return;
-    }
-  
-    // Add new nameText to names array, clear the input
-    names.push(nameText);
-    nameInput.value = "";
-  
-    // Store updated todos in localStorage, re-render the list
-    storeNames();
-    renderHighScores();
+      // Add new nameText to names array, clear the input
+      names.push(nameText);
+      nameInput.value = "";
+    
+      // Store updated todos in localStorage, re-render the list
+      storeNames();
+      renderHighScores();
   });
 
   answerArea.on("click", ".answerBtn", checkAnswer);
