@@ -11,6 +11,11 @@ They have the option to input their initials to be listed with names of others' 
 
 ```
 
+# Webpage photo files
+
+* Start screen: (assets/images/JavaScriptQuiz page start.png)
+* Question: (assets/images/JavaScriptQuiz question example.png)
+* Final screen: (assets/images/JavaScriptQuiz final screen.png)
 
 
 # Original assignment: 
