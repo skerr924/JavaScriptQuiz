@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 var startBtn = $("#start");
 var answerArea = $(".answerOptions");
 var questionNumber = 0; 
@@ -201,7 +203,7 @@ function renderHighScores(){
   }
   
   //all event listeners below: 
-  
+
   highScoreForm.addEventListener("submit", function(event) {
       event.preventDefault();
     
@@ -224,3 +226,5 @@ function renderHighScores(){
   answerArea.on("click", ".answerBtn", checkAnswer);
   startBtn.on("click", nextQuestion); 
   startBtn.on("click", startTimer); 
+
+});
