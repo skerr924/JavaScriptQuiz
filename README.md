@@ -14,9 +14,9 @@ They have the option to input their initials to be listed with names of others' 
 
 # Webpage photo files
 
-* Start screen: <img src="assets/images/JavaScriptQuiz page start.png">
-* Question: <img src="assets/images/JavaScriptQuiz question example.png">
-* Final screen: <img src="assets/images/JavaScriptQuiz final screen.png">
+* Start screen: <img src="assets/images/JavaScriptQuiz_page_start.png">
+* Question: <img src="assets/images/JavaScriptQuiz_question_example.png">
+* Final screen: <img src="assets/images/JavaScriptQuiz_final_screen.png">
 
 
 # Original assignment: 
